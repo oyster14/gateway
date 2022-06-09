@@ -1,0 +1,29 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+#          ?gateway????????????????
+          enabled: true
+#      routes:
+#        - id: after_route
+#          uri: lb://user-center
+#          predicates:
+##            - After=2010-01-20T17:42:47.789-07:00[America/Denver]
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
