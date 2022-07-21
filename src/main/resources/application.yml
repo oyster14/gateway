@@ -13,13 +13,18 @@ spring:
 #          让gateway通过服务发现找到其他组件
           enabled: true
       routes:
-        - id: after_route
+        - id: user_route
           uri: lb://user-center
           predicates:
-            - After=2010-01-20T17:42:47.789-07:00[America/Denver]
-          filters:
-            - AddRequestHeader=X-Request-Foo, Bar
-            - PreLog=a, b
+            - Path=/users/**
+        - id: content_route
+          uri: lb://content-center
+          predicates:
+            - Path=/shares/**,/admin/**
+#            - After=2010-01-20T17:42:47.789-07:00[America/Denver]
+#          filters:
+#            - AddRequestHeader=X-Request-Foo, Bar
+#            - PreLog=a, b
 
 management:
   endpoints:
